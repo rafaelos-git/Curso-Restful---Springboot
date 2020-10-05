@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ClienteRepository {
-    private List<Cliente> clientes;
+    private List<Cliente> clientes = new ArrayList<Cliente>();
     private int nextId;
 
     @PostConstruct
@@ -71,7 +71,6 @@ public class ClienteRepository {
         if(aux != null){
             aux.setEndereco(cliente.getEndereco());
             aux.setNome(cliente.getNome());
-            aux.setSaldo(cliente.getSaldo());
         }
 
         return aux;
