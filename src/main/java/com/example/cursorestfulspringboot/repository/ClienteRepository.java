@@ -2,6 +2,7 @@ package com.example.cursorestfulspringboot.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -45,14 +46,14 @@ public class ClienteRepository {
         return clientes;
     }
 
-    public Cliente getClienteById(int id){
+    public Optional<Cliente> getClienteById(int id){
         for(Cliente aux : clientes){
             if(aux.getId() == id){
-                return aux;
+                return Optional.of(aux);
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
 	public Cliente salvar(Cliente cliente) {
@@ -66,7 +67,7 @@ public class ClienteRepository {
 	}
 
 	public Cliente update(Cliente cliente) {
-        Cliente aux = getClienteById(cliente.getId());
+        Cliente aux = getClienteById(cliente.getId()).get(); //.get() para pegar o cliente dentro do Optional 
 
         if(aux != null){
             aux.setEndereco(cliente.getEndereco());
