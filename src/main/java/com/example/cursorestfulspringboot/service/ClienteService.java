@@ -15,38 +15,38 @@ import org.springframework.web.server.ResponseStatusException;
 //O proprio Spring inicia e gerencia objeto.
 @Service
 public class ClienteService {
-    @Autowired
-    private ClienteRepository repository;
-    
-    public Cliente fromDTO(ClienteDTO dto){
-        Cliente cliente = new Cliente();
+        @Autowired
+        private ClienteRepository repository;
 
-        cliente.setEndereco(dto.getEndereco());
-        cliente.setNome(dto.getNome());
+        public Cliente fromDTO(ClienteDTO dto){
+                Cliente cliente = new Cliente();
 
-        return cliente;
-    }
+                cliente.setEndereco(dto.getEndereco());
+                cliente.setNome(dto.getNome());
 
-	public List<Cliente> getAllClientes() {
-		return repository.getAllClientes();
-	}
+                return cliente;
+        }
 
-	public Cliente getClienteById(int id) {
-        Optional <Cliente> op = repository.getClienteById(id);
-        return op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não cadastrado"));
-	}
+        public List<Cliente> getAllClientes() {
+                return repository.getAllClientes();
+        }
 
-	public Cliente salvar(Cliente cliente) {
-        //Possíveis regras de negócio devem ser implementadas aqui
-        return repository.salvar(cliente);
-	}
+        public Cliente getClienteById(int id) {
+                Optional <Cliente> op = repository.getClienteById(id);
+                return op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não cadastrado"));
+        }
 
-	public void removeById(int id) {
-        repository.remove(getClienteById(id));
-	}
+        public Cliente salvar(Cliente cliente) {
+                //Possíveis regras de negócio devem ser implementadas aqui
+                return repository.salvar(cliente);
+        }
 
-	public Cliente update(Cliente cliente) {
-        getClienteById(cliente.getId());
-        return repository.update(cliente);
-	}
+        public void removeById(int id) {
+                repository.remove(getClienteById(id));
+        }
+
+        public Cliente update(Cliente cliente) {
+                getClienteById(cliente.getId());
+                return repository.update(cliente);
+        }
 }
